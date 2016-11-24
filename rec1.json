@@ -1,0 +1,518 @@
+{
+  "title": null,
+  "width": 211,
+  "stdout": [
+    [
+      0.017946,
+      "\u001b]0;sfink@tornado: ~\u0007\u001b[01;32msfink@tornado\u001b[00m:\u001b[01;34m~\u001b[00m$ "
+    ],
+    [
+      1.409191,
+      "i"
+    ],
+    [
+      0.183175,
+      "n"
+    ],
+    [
+      0.102657,
+      "f"
+    ],
+    [
+      0.113783,
+      "l"
+    ],
+    [
+      0.218466,
+      "u"
+    ],
+    [
+      0.164418,
+      "x"
+    ],
+    [
+      1.447137,
+      "\r\n"
+    ],
+    [
+      0.009537,
+      "Connected to http://localhost:8086 version 1.0.2\r\nInfluxDB shell version: 1.0.2\r\n"
+    ],
+    [
+      0.000744,
+      "> "
+    ],
+    [
+      1.440407,
+      "\u001b[1G\u001b[0K> U\u001b[4G"
+    ],
+    [
+      0.101703,
+      "\u001b[1G\u001b[0K> US\u001b[5G"
+    ],
+    [
+      0.139591,
+      "\u001b[1G\u001b[0K> USE\u001b[6G"
+    ],
+    [
+      0.124107,
+      "\u001b[1G\u001b[0K> USE \u001b[7G"
+    ],
+    [
+      0.56355,
+      "\u001b[1G\u001b[0K> USE d\u001b[8G"
+    ],
+    [
+      0.166181,
+      "\u001b[1G\u001b[0K> USE dr\u001b[9G"
+    ],
+    [
+      0.095521,
+      "\u001b[1G\u001b[0K> USE dri\u001b[10G"
+    ],
+    [
+      0.459803,
+      "\u001b[1G\u001b[0K> USE driv\u001b[11G"
+    ],
+    [
+      0.219023,
+      "\u001b[1G\u001b[0K> USE drive\u001b[12G"
+    ],
+    [
+      0.587363,
+      "\u001b[1G\u001b[0K> USE drive4\u001b[13G"
+    ],
+    [
+      0.684865,
+      "\u001b[1G\u001b[0K> USE drive4d\u001b[14G"
+    ],
+    [
+      0.058731,
+      "\u001b[1G\u001b[0K> USE drive4da\u001b[15G"
+    ],
+    [
+      0.245841,
+      "\u001b[1G\u001b[0K> USE drive4dat\u001b[16G"
+    ],
+    [
+      0.048339,
+      "\u001b[1G\u001b[0K> USE drive4data\u001b[17G"
+    ],
+    [
+      0.058731,
+      "\u001b[1G\u001b[0K> USE drive4data;\u001b[18G"
+    ],
+    [
+      1.184281,
+      "\r\n"
+    ],
+    [
+      0.010357,
+      "Using database drive4data\r\n> "
+    ],
+    [
+      3.498936,
+      "\u001b[1G\u001b[0K> S\u001b[4G"
+    ],
+    [
+      0.157022,
+      "\u001b[1G\u001b[0K> SE\u001b[5G"
+    ],
+    [
+      0.132144,
+      "\u001b[1G\u001b[0K> SEL\u001b[6G"
+    ],
+    [
+      0.092499,
+      "\u001b[1G\u001b[0K> SELE\u001b[7G"
+    ],
+    [
+      0.174912,
+      "\u001b[1G\u001b[0K> SELEC\u001b[8G"
+    ],
+    [
+      0.515197,
+      "\u001b[1G\u001b[0K> SELECT\u001b[9G"
+    ],
+    [
+      0.474557,
+      "\u001b[1G\u001b[0K> SELECT \u001b[10G"
+    ],
+    [
+      0.556739,
+      "\u001b[1G\u001b[0K> SELECT t\u001b[11G"
+    ],
+    [
+      0.076739,
+      "\u001b[1G\u001b[0K> SELECT ti\u001b[12G"
+    ],
+    [
+      0.175103,
+      "\u001b[1G\u001b[0K> SELECT tim\u001b[13G"
+    ],
+    [
+      0.442825,
+      "\u001b[1G\u001b[0K> SELECT time\u001b[14G"
+    ],
+    [
+      0.187557,
+      "\u001b[1G\u001b[0K> SELECT time,\u001b[15G"
+    ],
+    [
+      0.142116,
+      "\u001b[1G\u001b[0K> SELECT time, \u001b[16G"
+    ],
+    [
+      0.082952,
+      "\u001b[1G\u001b[0K> SELECT time, p\u001b[17G"
+    ],
+    [
+      0.138755,
+      "\u001b[1G\u001b[0K> SELECT time, pa\u001b[18G"
+    ],
+    [
+      0.184173,
+      "\u001b[1G\u001b[0K> SELECT time, par\u001b[19G"
+    ],
+    [
+      0.000206,
+      "\u001b[1G\u001b[0K> SELECT time, part\u001b[20G"
+    ],
+    [
+      0.138604,
+      "\u001b[1G\u001b[0K> SELECT time, parti\u001b[21G"
+    ],
+    [
+      0.130356,
+      "\u001b[1G\u001b[0K> SELECT time, partic\u001b[22G"
+    ],
+    [
+      0.103065,
+      "\u001b[1G\u001b[0K> SELECT time, partici\u001b[23G"
+    ],
+    [
+      0.130233,
+      "\u001b[1G\u001b[0K> SELECT time, particip\u001b[24G"
+    ],
+    [
+      0.130125,
+      "\u001b[1G\u001b[0K> SELECT time, participa\u001b[25G"
+    ],
+    [
+      0.121379,
+      "\u001b[1G\u001b[0K> SELECT time, participan\u001b[26G"
+    ],
+    [
+      0.112348,
+      "\u001b[1G\u001b[0K> SELECT time, participant\u001b[27G"
+    ],
+    [
+      0.29993,
+      "\u001b[1G\u001b[0K> SELECT time, participant,\u001b[28G"
+    ],
+    [
+      0.482847,
+      "\u001b[1G\u001b[0K> SELECT time, participant, \u001b[29G"
+    ],
+    [
+      0.11298,
+      "\u001b[1G\u001b[0K> SELECT time, participant, v\u001b[30G"
+    ],
+    [
+      0.174304,
+      "\u001b[1G\u001b[0K> SELECT time, participant, ve\u001b[31G"
+    ],
+    [
+      0.058958,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh\u001b[32G"
+    ],
+    [
+      0.121408,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_\u001b[33G"
+    ],
+    [
+      0.140577,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_s\u001b[34G"
+    ],
+    [
+      0.326354,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_sp\u001b[35G"
+    ],
+    [
+      0.109073,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_spe\u001b[36G"
+    ],
+    [
+      0.052992,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_spee\u001b[37G"
+    ],
+    [
+      0.145735,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed\u001b[38G"
+    ],
+    [
+      0.321355,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed \u001b[39G"
+    ],
+    [
+      0.206306,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed F\u001b[40G"
+    ],
+    [
+      0.121593,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FR\u001b[41G"
+    ],
+    [
+      0.088193,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FRO\u001b[42G"
+    ],
+    [
+      0.180855,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM\u001b[43G"
+    ],
+    [
+      0.165974,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM \u001b[44G"
+    ],
+    [
+      0.064184,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM s\u001b[45G"
+    ],
+    [
+      0.050994,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM sa\u001b[46G"
+    ],
+    [
+      0.087954,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM sam\u001b[47G"
+    ],
+    [
+      0.174016,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samp\u001b[48G"
+    ],
+    [
+      0.174387,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM sampl\u001b[49G"
+    ],
+    [
+      0.101329,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM sample\u001b[50G"
+    ],
+    [
+      0.183584,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples\u001b[51G"
+    ],
+    [
+      0.12419,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples \u001b[52G"
+    ],
+    [
+      0.491552,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples W\u001b[53G"
+    ],
+    [
+      0.193979,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WH\u001b[54G"
+    ],
+    [
+      0.058094,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHE\u001b[55G"
+    ],
+    [
+      0.11425,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHER\u001b[56G"
+    ],
+    [
+      0.404894,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE\u001b[57G"
+    ],
+    [
+      0.259796,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE \u001b[58G"
+    ],
+    [
+      0.249223,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE v\u001b[59G"
+    ],
+    [
+      0.085819,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE ve\u001b[60G"
+    ],
+    [
+      0.122192,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh\u001b[61G"
+    ],
+    [
+      0.307908,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_\u001b[62G"
+    ],
+    [
+      0.063086,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_s\u001b[63G"
+    ],
+    [
+      0.177162,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_sp\u001b[64G"
+    ],
+    [
+      0.065114,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_spe\u001b[65G"
+    ],
+    [
+      0.13899,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_spee\u001b[66G"
+    ],
+    [
+      0.165835,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed\u001b[67G"
+    ],
+    [
+      0.759024,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed \u001b[68G"
+    ],
+    [
+      0.288014,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed >\u001b[69G"
+    ],
+    [
+      0.131138,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > \u001b[70G"
+    ],
+    [
+      0.208236,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0\u001b[71G"
+    ],
+    [
+      0.211151,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 \u001b[72G"
+    ],
+    [
+      0.358253,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 G\u001b[73G"
+    ],
+    [
+      0.165909,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GR\u001b[74G"
+    ],
+    [
+      0.1225,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GRO\u001b[75G"
+    ],
+    [
+      0.245629,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROU\u001b[76G"
+    ],
+    [
+      0.209883,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP\u001b[77G"
+    ],
+    [
+      0.184108,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP \u001b[78G"
+    ],
+    [
+      0.243828,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP B\u001b[79G"
+    ],
+    [
+      0.336317,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY\u001b[80G"
+    ],
+    [
+      0.212677,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY \u001b[81G"
+    ],
+    [
+      0.279719,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY p\u001b[82G"
+    ],
+    [
+      0.07294,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY pa\u001b[83G"
+    ],
+    [
+      0.275663,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY pa\u001b[83G"
+    ],
+    [
+      0.076593,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY par\u001b[84G"
+    ],
+    [
+      0.127512,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY part\u001b[85G"
+    ],
+    [
+      0.122297,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY parti\u001b[86G"
+    ],
+    [
+      0.173227,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY partic\u001b[87G"
+    ],
+    [
+      0.078044,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY partici\u001b[88G"
+    ],
+    [
+      0.17606,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY particip\u001b[89G"
+    ],
+    [
+      0.296589,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participa\u001b[90G"
+    ],
+    [
+      0.038124,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant\u001b[92G"
+    ],
+    [
+      0.776384,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant \u001b[93G"
+    ],
+    [
+      0.431117,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant L\u001b[94G"
+    ],
+    [
+      0.201313,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LI\u001b[95G"
+    ],
+    [
+      0.16549,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LIM\u001b[96G"
+    ],
+    [
+      0.157169,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LIMI\u001b[97G"
+    ],
+    [
+      0.066977,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LIMIT\u001b[98G"
+    ],
+    [
+      0.327081,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LIMIT \u001b[99G"
+    ],
+    [
+      0.610523,
+      "\u001b[1G\u001b[0K> SELECT time, participant, veh_speed FROM samples WHERE veh_speed > 0 GROUP BY participant LIMIT 5\u001b[100G"
+    ],
+    [
+      1.794356,
+      "\r\n"
+    ],
+    [
+      1.806836,
+      "name: samples\r\ntags: participant=1\r\ntime\t\t\tparticipant\tveh_speed\r\n----\t\t\t-----------\t---------\r\n2013-05-07T21:29:17.12Z\t1\t\t1.5625\r\n2013-05-07T21:29:18.1Z\t1\t\t1.5625\r\n2013-05-07T21:29:18.12Z\t1\t\t1.203125\r\n2013-05-07T21:29:19.1Z\t1\t\t1.203125\r\n2013-05-07T21:29:19.12Z\t1\t\t1.4375\r\n\r\nname: samples\r\ntags: participant=10\r\ntime\t\t\tparticipant\tveh_speed\r\n----\t\t\t-----------\t---------\r\n2014-05-29T19:27:40.02Z\t10\t\t2.5\r\n2014-05-29T19:27:40.08Z\t10\t\t2.5\r\n2014-05-29T19:27:40.18Z\t10\t\t2.5\r\n2014-05-29T19:27:42.02Z\t10\t\t3\r\n2014-05-29T19:27:42.08Z\t10\t\t3\r\n\r\n> "
+    ]
+  ],
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/usr/bin/zsh"
+  },
+  "duration": 73.879563,
+  "version": 1,
+  "command": null,
+  "height": 26
+}

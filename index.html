@@ -1,50 +1,415 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/darcula.css">
+    <link rel="stylesheet" type="text/css" href="plugin/asciinema/asciinema-player.css"/>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>InfluxDB and Grafana</h1>
+            <i>Christian Gorenflo and Niko Fink</i><br/>
+            Waterloo, 2016-11-23
+        </section>
+        <section>
+            <section data-background-image="http://wallpapercave.com/download/google-data-center-wallpaper-khhcRYm">
+                <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">Why InfluxDB?</h1>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <th>InfluxDB</th>
+                        <th>MySQL</th>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Time Series DBMS <img style="height: 250px"
+                                                  src="https://photos1.blogger.com/blogger/2799/1927/1600/airline1_web.0.jpg"/>
+                        </td>
+                        <td>Relational DBMS <img style="height: 250px"
+                                                 src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20160229120043/organization-relational-model.png"/>
+                        </td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Schema-Free</td>
+                        <td>Static Schema</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Int, Float, String, Bool</td>
+                        <td>various different data types</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>No Transactions</td>
+                        <td>Full ACID</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <th>InfluxDB</th>
+                        <th>MySQL</th>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Optimized for Creates and Reads</td>
+                        <td>Good for all CRUD Operations</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Rows with Timestamps</td>
+                        <td>Rows with Relations</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Columns can be defined on-the-fly</td>
+                        <td>Schema has to be defined first</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>Missing fields are not saved</td>
+                        <td>Missing fields consume space</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <th>InfluxDB</th>
+                        <th>kdb+</th>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>10.000 rows/sec</td>
+                        <td>100.000 rows/sec</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>familiar SQL-like query language</td>
+                        <td>Complicated query language</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>open-source</td>
+                        <td>proprietary</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>big ecosystem of tools</td>
+                        <td>no additional software</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <span style="display: inline-block; text-align: center; vertical-align: middle;">
+                    <img style="height: 380px; width: auto; display: block; border: 0 solid black; vertical-align: middle; max-height: none; max-width: none; margin: 0;"
+                         src="https://www.influxdata.com/wp-content/themes/influx/images/tick-stack-grid.jpg"/>
+                    TICK-Stack
+                </span>
+                <span style="display: inline-block; text-align: center; font-size: 200px; vertical-align: middle;">+</span>
+                <span style="display: inline-block; text-align: center; vertical-align: middle;">
+                    <img style="height: 380px; width: auto; display: block; border: 0 solid black; vertical-align: middle; max-height: none; max-width: none; margin: 0;"
+                         src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjM1MXB4Ig0KCSBoZWlnaHQ9IjM2NXB4IiB2aWV3Qm94PSIwIDAgMzUxIDM2NSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzUxIDM2NTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fQ0KPC9zdHlsZT4NCjxnIGlkPSJMYXllcl8xIj4NCjwvZz4NCjxnIGlkPSJMYXllcl8yIj4NCgk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE3MC45NjMiIHkxPSI0MzkuOTQxNCIgeDI9IjE3MC45NjMiIHkyPSIxMDYuMDE1NCI+DQoJCTxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkYyMDAiLz4NCgkJPHN0b3AgIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6I0YxNUEyOSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTIyOC44LDIzOS44Yy0xLjEtMS40LTMuMS0xLjgtNC43LTAuOWMtMC40LDAuMi0wLjgsMC40LTEuMiwwLjZjLTEuNCwwLjctMi44LDEuMy00LjMsMS44DQoJCWMtMS41LDAuNS0zLjEsMC45LTQuNywxLjJjLTAuOCwwLjEtMS42LDAuMi0yLjUsMC4zYy0wLjQsMC0wLjgsMC4xLTEuMywwLjFjLTAuNCwwLTAuOSwwLTEuMiwwYy0wLjQsMC0wLjgsMC0xLjIsMA0KCQljLTAuNSwwLTEsMC0xLjUtMC4xYzAsMC0wLjMsMC0wLjEsMGwtMC4yLDBsLTAuMywwYy0wLjIsMC0wLjUsMC0wLjctMC4xYy0wLjUtMC4xLTAuOS0wLjEtMS40LTAuMmMtMy43LTAuNS03LjQtMS42LTEwLjktMy4yDQoJCWMtMy42LTEuNi03LTMuOC0xMC4xLTYuNmMtMy4xLTIuOC01LjgtNi4xLTcuOS05LjljLTIuMS0zLjgtMy42LTgtNC4zLTEyLjRjLTAuMy0yLjItMC41LTQuNS0wLjQtNi43YzAtMC42LDAuMS0xLjIsMC4xLTEuOA0KCQljMCwwLjIsMC0wLjEsMC0wLjFsMC0wLjJsMC0wLjVjMC0wLjMsMC4xLTAuNiwwLjEtMC45YzAuMS0xLjIsMC4zLTIuNCwwLjUtMy42YzEuNy05LjYsNi41LTE5LDEzLjktMjYuMWMxLjktMS44LDMuOS0zLjQsNi00LjkNCgkJYzIuMS0xLjUsNC40LTIuOCw2LjgtMy45YzIuNC0xLjEsNC44LTIsNy40LTIuN2MyLjUtMC43LDUuMS0xLjEsNy44LTEuNGMxLjMtMC4xLDIuNi0wLjIsNC0wLjJjMC40LDAsMC42LDAsMC45LDBsMS4xLDBsMC43LDANCgkJYzAuMywwLDAsMCwwLjEsMGwwLjMsMGwxLjEsMC4xYzIuOSwwLjIsNS43LDAuNiw4LjUsMS4zYzUuNiwxLjIsMTEuMSwzLjMsMTYuMiw2LjFjMTAuMiw1LjcsMTguOSwxNC41LDI0LjIsMjUuMQ0KCQljMi43LDUuMyw0LjYsMTEsNS41LDE2LjljMC4yLDEuNSwwLjQsMywwLjUsNC41bDAuMSwxLjFsMC4xLDEuMWMwLDAuNCwwLDAuOCwwLDEuMWMwLDAuNCwwLDAuOCwwLDEuMWwwLDFsMCwxLjENCgkJYzAsMC43LTAuMSwxLjktMC4xLDIuNmMtMC4xLDEuNi0wLjMsMy4zLTAuNSw0LjljLTAuMiwxLjYtMC41LDMuMi0wLjgsNC44Yy0wLjMsMS42LTAuNywzLjItMS4xLDQuN2MtMC44LDMuMS0xLjgsNi4yLTMsOS4zDQoJCWMtMi40LDYtNS42LDExLjgtOS40LDE3LjFjLTcuNywxMC42LTE4LjIsMTkuMi0zMC4xLDI0LjdjLTYsMi43LTEyLjMsNC43LTE4LjgsNS43Yy0zLjIsMC42LTYuNSwwLjktOS44LDFsLTAuNiwwbC0wLjUsMGwtMS4xLDANCgkJbC0xLjYsMGwtMC44LDBjMC40LDAtMC4xLDAtMC4xLDBsLTAuMywwYy0xLjgsMC0zLjUtMC4xLTUuMy0wLjNjLTctMC41LTEzLjktMS44LTIwLjctMy43Yy02LjctMS45LTEzLjItNC42LTE5LjQtNy44DQoJCWMtMTIuMy02LjYtMjMuMy0xNS42LTMyLTI2LjVjLTQuMy01LjQtOC4xLTExLjMtMTEuMi0xNy40Yy0zLjEtNi4xLTUuNi0xMi42LTcuNC0xOS4xYy0xLjgtNi42LTIuOS0xMy4zLTMuNC0yMC4xbC0wLjEtMS4zbDAtMC4zDQoJCWwwLTAuM2wwLTAuNmwwLTEuMWwwLTAuM2wwLTAuNGwwLTAuOGwwLTEuNmwwLTAuM2MwLDAsMCwwLjEsMC0wLjFsMC0wLjZjMC0wLjgsMC0xLjcsMC0yLjVjMC4xLTMuMywwLjQtNi44LDAuOC0xMC4yDQoJCWMwLjQtMy40LDEtNi45LDEuNy0xMC4zYzAuNy0zLjQsMS41LTYuOCwyLjUtMTAuMmMxLjktNi43LDQuMy0xMy4yLDcuMS0xOS4zYzUuNy0xMi4yLDEzLjEtMjMuMSwyMi0zMS44YzIuMi0yLjIsNC41LTQuMiw2LjktNi4yDQoJCWMyLjQtMS45LDQuOS0zLjcsNy41LTUuNGMyLjUtMS43LDUuMi0zLjIsNy45LTQuNmMxLjMtMC43LDIuNy0xLjQsNC4xLTJjMC43LTAuMywxLjQtMC42LDIuMS0wLjljMC43LTAuMywxLjQtMC42LDIuMS0wLjkNCgkJYzIuOC0xLjIsNS43LTIuMiw4LjctMy4xYzAuNy0wLjIsMS41LTAuNCwyLjItMC43YzAuNy0wLjIsMS41LTAuNCwyLjItMC42YzEuNS0wLjQsMy0wLjgsNC41LTEuMWMwLjctMC4yLDEuNS0wLjMsMi4zLTAuNQ0KCQljMC44LTAuMiwxLjUtMC4zLDIuMy0wLjVjMC44LTAuMSwxLjUtMC4zLDIuMy0wLjRsMS4xLTAuMmwxLjEtMC4yYzAuOC0wLjEsMS41LTAuMiwyLjMtMC4zYzAuOS0wLjEsMS43LTAuMiwyLjYtMC4zDQoJCWMwLjctMC4xLDEuOS0wLjIsMi42LTAuM2MwLjUtMC4xLDEuMS0wLjEsMS42LTAuMmwxLjEtMC4xbDAuNS0wLjFsMC42LDBjMC45LTAuMSwxLjctMC4xLDIuNi0wLjJsMS4zLTAuMWMwLDAsMC41LDAsMC4xLDBsMC4zLDANCgkJbDAuNiwwYzAuNywwLDEuNS0wLjEsMi4yLTAuMWMyLjktMC4xLDUuOS0wLjEsOC44LDBjNS44LDAuMiwxMS41LDAuOSwxNywxLjljMTEuMSwyLjEsMjEuNSw1LjYsMzAuOSwxMC4zDQoJCWM5LjUsNC42LDE3LjksMTAuMywyNS4zLDE2LjVjMC41LDAuNCwwLjksMC44LDEuNCwxLjJjMC40LDAuNCwwLjksMC44LDEuMywxLjJjMC45LDAuOCwxLjcsMS42LDIuNiwyLjRjMC45LDAuOCwxLjcsMS42LDIuNSwyLjQNCgkJYzAuOCwwLjgsMS42LDEuNiwyLjQsMi41YzMuMSwzLjMsNiw2LjYsOC42LDEwYzUuMiw2LjcsOS40LDEzLjUsMTIuNywxOS45YzAuMiwwLjQsMC40LDAuOCwwLjYsMS4yYzAuMiwwLjQsMC40LDAuOCwwLjYsMS4yDQoJCWMwLjQsMC44LDAuOCwxLjYsMS4xLDIuM2MwLjQsMC44LDAuNywxLjUsMS4xLDIuM2MwLjMsMC44LDAuNywxLjUsMSwyLjNjMS4yLDMsMi40LDUuOCwzLjMsOC42YzEuNSw0LjQsMi42LDguMywzLjUsMTEuNw0KCQljMC4zLDEuNCwxLjYsMi4zLDMsMi4xbDAsMGMxLjUtMC4xLDIuNi0xLjMsMi42LTIuOGMwLjEtMy43LDAtOC0wLjQtMTIuOWMtMC42LTYuMS0xLjYtMTMuMS0zLjYtMjAuOWMtMi03LjctNS0xNi4yLTkuNC0yNQ0KCQljLTQuNC04LjgtMTAuMS0xNy45LTE3LjUtMjYuOGMtMi45LTMuNS02LjEtNi45LTkuNS0xMC4yYzUuMS0yMC4zLTYuMi0zNy45LTYuMi0zNy45Yy0xOS41LTEuMi0zMS45LDYuMS0zNi41LDkuNA0KCQljLTAuOC0wLjMtMS41LTAuNy0yLjMtMWMtMy4zLTEuMy02LjctMi42LTEwLjItMy43Yy0zLjUtMS4xLTcuMS0yLjEtMTAuOC0zYy0zLjctMC45LTcuNC0xLjYtMTEuMi0yLjJjLTAuNy0wLjEtMS4zLTAuMi0yLTAuMw0KCQlDMjA5LjYsMTIuNCwxODUuMiwxLDE4NS4yLDFjLTI3LjMsMTcuMy0zMi40LDQxLjUtMzIuNCw0MS41YzAuMiwwLjQsMC41LDAuOCwwLjcsMS4xYy0xLjgsMC41LTMuNywxLjEtNS41LDEuNg0KCQljLTIuMSwwLjYtNC4yLDEuNC02LjIsMi4yYy0yLjEsMC44LTQuMSwxLjYtNi4yLDIuNWMtNC4xLDEuOC04LjIsMy44LTEyLjIsNmMtNCwyLjItNy45LDQuNy0xMS43LDcuNGMtMC4xLDAuMS0wLjIsMC4yLTAuNCwwLjMNCgkJYy0wLjItMC42LTAuMy0wLjktMC4zLTAuOWMtMzcuNy0xNC40LTcxLjMsMi45LTcxLjMsMi45Yy0zLjEsNDAuMiwxNS4xLDY1LjQsMTguNyw3MGMtMC45LDIuNS0xLjcsNS0yLjUsNy41DQoJCWMtMi44LDkuMS00LjksMTguNC02LjIsMjguMWMtMC4yLDEuNC0wLjQsMi44LTAuNSw0LjJDMTQuMywxOTIuNiw0LDIyNy45LDQsMjI3LjljMjkuMSwzMy41LDYzLDM1LjUsNjMsMzUuNWMwLDAsMC4xLTAuMSwwLjEtMC4xDQoJCWM0LjMsNy43LDkuMywxNSwxNC45LDIxLjljMi40LDIuOSw0LjgsNS42LDcuNCw4LjNjLTEwLjYsMzAuMywxLjUsNTUuNiwxLjUsNTUuNmMzMi40LDEuMiw1My43LTE0LjIsNTguMi0xNy43DQoJCWMzLjIsMS4xLDYuNSwyLjEsOS44LDIuOWMxMCwyLjYsMjAuMiw0LjEsMzAuMyw0LjVjMi41LDAuMSw1LjEsMC4yLDcuNiwwLjFsMS4yLDBsMC44LDBsMS42LDBsMS42LTAuMWMwLDAsMCwwLjEsMCwwLjENCgkJYzE1LjMsMjEuOCw0Mi4xLDI0LjksNDIuMSwyNC45YzIxLjYtMjIuNywyMC4yLTQ1LjMsMjAuMi00NS4zYy0wLjItMC4yLTAuNC0wLjMtMC42LTAuNWM0LjItMi45LDguMi02LjEsMTItOS41DQoJCWM3LjYtNi45LDE0LjMtMTQuOCwxOS45LTIzLjNjMC41LTAuOCwxLTEuNiwxLjUtMi40YzIxLjYsMS4yLDM2LjktMTMuNCwzNi45LTEzLjRjLTQtMjUuMi0xOS42LTM2LTE5LjYtMzZjLTAuMiwwLTAuMywwLjEtMC41LDAuMQ0KCQljMC4yLTEuNSwwLjMtMywwLjQtNC41YzAuMi0yLjQsMC4yLTQuOSwwLjItNy4zbDAtMS44bDAtMC45bDAtMC41YzAtMC42LDAtMC40LDAtMC42bC0wLjEtMS41bC0wLjEtMmMwLTAuNy0wLjEtMS4zLTAuMi0xLjkNCgkJYy0wLjEtMC42LTAuMS0xLjMtMC4yLTEuOWwtMC4yLTEuOWwtMC4zLTEuOWMtMC40LTIuNS0wLjgtNC45LTEuNC03LjRjLTIuMy05LjctNi4xLTE4LjktMTEtMjcuMmMtNS04LjMtMTEuMi0xNS42LTE4LjItMjEuOA0KCQljLTctNi4yLTE0LjktMTEuMi0yMy4xLTE0LjljLTguMi0zLjctMTYuOS02LjEtMjUuNS03LjJjLTQuMy0wLjYtOC42LTAuOC0xMi45LTAuN2wtMS42LDBsLTAuNCwwYy0wLjEsMC0wLjYsMC0wLjUsMGwtMC43LDANCgkJbC0xLjYsMC4xYy0wLjYsMC0xLjIsMC4xLTEuNywwLjFjLTIuMiwwLjItNC40LDAuNS02LjUsMC45Yy04LjYsMS42LTE2LjYsNC43LTIzLjgsOWMtNy4xLDQuMy0xMy4zLDkuNi0xOC4zLDE1LjYNCgkJYy01LDYtOC45LDEyLjctMTEuNiwxOS42Yy0yLjcsNi45LTQuMiwxNC4xLTQuNiwyMWMtMC4xLDEuNy0wLjEsMy41LTAuMSw1LjJjMCwwLjQsMCwwLjksMCwxLjNsMC4xLDEuNGMwLjEsMC44LDAuMSwxLjcsMC4yLDIuNQ0KCQljMC4zLDMuNSwxLDYuOSwxLjksMTAuMWMxLjksNi41LDQuOSwxMi40LDguNiwxNy40YzMuNyw1LDguMiw5LjEsMTIuOSwxMi40YzQuNywzLjIsOS44LDUuNSwxNC44LDdjNSwxLjUsMTAsMi4xLDE0LjcsMi4xDQoJCWMwLjYsMCwxLjIsMCwxLjcsMGMwLjMsMCwwLjYsMCwwLjksMGMwLjMsMCwwLjYsMCwwLjktMC4xYzAuNSwwLDEtMC4xLDEuNS0wLjFjMC4xLDAsMC4zLDAsMC40LTAuMWwwLjUtMC4xYzAuMywwLDAuNi0wLjEsMC45LTAuMQ0KCQljMC42LTAuMSwxLjEtMC4yLDEuNy0wLjNjMC42LTAuMSwxLjEtMC4yLDEuNi0wLjRjMS4xLTAuMiwyLjEtMC42LDMuMS0wLjljMi0wLjcsMy45LTEuNSw1LjctMi40YzEuOC0wLjksMy40LTIsNS0zDQoJCWMwLjQtMC4zLDAuOS0wLjYsMS4zLTFDMjI5LjksMjQzLjgsMjMwLjEsMjQxLjQsMjI4LjgsMjM5LjhMMjI4LjgsMjM5Ljh6Ii8+DQo8L2c+DQo8L3N2Zz4NCg=="/>
+                    Grafana
+                </span>
+            </section>
+            <section>
+                <img class="stretch" style="border: 0; margin: 0;"
+                     src="https://www.influxdata.com/wp-content/themes/influx/images/TICK-Stack.png"/>
+            </section>
+            <section>
+                <img class="stretch" style="border: 0; margin: 0;"
+                     src="http://grafana.org/assets/img/blog/v3.0/zabbix_app.png"/>
+            </section>
+        </section>
+        <section>
+            <section data-background-image="https://www.ophtek.com/wp-content/uploads/2015/03/hard-drive-pile.jpg">
+                <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">Data Organization</h1>
+            </section>
+            <section>
+                <h2>Line Protocol</h2>
+                <pre style="background-color: #333; padding: 10px">
+<span class="fragment highlight-red" data-fragment-index="1">&lt;measurement&gt;</span><span
+                        class="fragment highlight-blue" data-fragment-index="2">[,&lt;tag-key>=&lt;tag-value>...]</span><span
+                        style="opacity: 0.5">⎵⤦</span>
+<span class="fragment highlight-green" data-fragment-index="3">&lt;field-key>=&lt;field-value>[,&lt;field2-key>=&lt;field2-value>...]</span><span
+                        style="opacity: 0.5">⎵⤦</span>
+[unix-nano-timestamp]<span style="opacity: 0.5">\n</span></pre>
+                <pre style="background-color: #333; padding: 10px">
+<span class="fragment highlight-red" data-fragment-index="1">sensor_data</span><span class="fragment highlight-blue"
+                                                                                     data-fragment-index="2">,imei=6089</span><span
+                        style="opacity: 0.5">⎵⤦</span>
+<span class="fragment highlight-green"
+      data-fragment-index="3">acceleration_x=0.6939569,acceleration_y=0.3649411</span><span
+                        style="opacity: 0.5">⎵⤦</span>
+1434067467000000000<span style="opacity: 0.5">\n</span></pre>
+                <style>
+                    .fade-away.visible {
+                        display: none;
+                    }
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+                    .fade-away {
+                        display: inline-block;
+                    }
+                </style>
+                <table class="fragment fade-out fade-away" data-fragment-index="5">
+                    <tr>
+                        <th class="fragment fade-in" style="color: #ff2c2d;" data-fragment-index="1">measurement</th>
+                        <td class="fragment fade-in" data-fragment-index="1">table name</td>
+                    </tr>
+                    <tr>
+                        <th class="fragment fade-in" style="color: #1b91ff;" data-fragment-index="2">tags</th>
+                        <td class="fragment fade-in" data-fragment-index="2">secondary indices (strings)</td>
+                    </tr>
+                    <tr>
+                        <th class="fragment fade-in" style="color: #17ff2e;" data-fragment-index="3">fields</th>
+                        <td class="fragment fade-in" data-fragment-index="3">values (any type)</td>
+                    </tr>
+                    <tr>
+                        <th class="fragment fade-in" data-fragment-index="4">time</th>
+                        <td class="fragment fade-in" data-fragment-index="4">unix timestamp in nanoseconds</td>
+                    </tr>
+                </table>
+                <pre style="background-color: #333; padding: 10px" class="fragment fade-in" data-fragment-index="5">name: <span
+                        class="fragment highlight-red" data-fragment-index="1">sensor_data</span>
+-----------------
+time                      <span class="fragment highlight-blue" data-fragment-index="2">imei</span>  <span
+                            class="fragment highlight-green"
+                            data-fragment-index="3">acceleration_x  acceleration_y  ...</span>
+2016-05-06T15:50:48.811Z  <span class="fragment highlight-blue" data-fragment-index="2">6089</span>  <span
+                            class="fragment highlight-green"
+                            data-fragment-index="3">0.6939569       0.3649411       ...</span>
+2016-05-06T15:50:49.812Z  <span class="fragment highlight-blue" data-fragment-index="2">6089</span>  <span
+                            class="fragment highlight-green"
+                            data-fragment-index="3">0.6933582       0.34473312      ...</span>
+2016-05-06T15:50:50.815Z  <span class="fragment highlight-blue" data-fragment-index="2">6089</span>  <span
+                            class="fragment highlight-green"
+                            data-fragment-index="3">0.6730005       0.34488282      ...</span>
+2016-05-06T15:50:51.828Z  <span class="fragment highlight-blue" data-fragment-index="2">6089</span>  <span
+                            class="fragment highlight-green"
+                            data-fragment-index="3">0.6836284       0.3466791       ...</span>
+</pre>
+            </section>
+            <section>
+                <h2>Tags vs Fields</h2>
+                <ul>
+                    <li class="fragment fade-in">tags are indexed, fields are not</li>
+                    <li class="fragment fade-in">data on disk is grouped by tags</li>
+                    <li class="fragment fade-in">too many tags make InfluxDB slow</li>
+                    <li class="fragment fade-in">only fields can be queried</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section data-background-image="http://www.aisquared.com/wp-content/uploads/2014/05/libraries.jpg">
+                <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">Querying Data</h1>
+                <span style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">...with InfluxQL</span>
+            </section>
+            <section>
+                <asciinema-player src="rec2.json" cols="200" rows="30" poster="npt:0:1"></asciinema-player>
+            </section>
+            <section>
+                <h2>Query Format</h2>
+                <table>
+                    <tr class="fragment fade-up">
+                        <th style="text-align: right">SELECT</th>
+                        <td>* | [time,][tag_key,...]field_key</td>
+                    </tr>
+                    <tr class="fragment fade-up">
+                        <th style="text-align: right">FROM</th>
+                        <td>measurement,...</td>
+                    </tr>
+                    <tr class="fragment fade-up">
+                        <th style="text-align: right">WHERE</th>
+                        <td>key <span style="padding: 0 20px; display: inline-block">=|!=|<=|~=</span> 'value'|"key"
+                        </td>
+                    </tr>
+                    <tr class="fragment fade-up">
+                        <th style="text-align: right; white-space: nowrap">GROUP BY</th>
+                        <td>tag_key,...</td>
+                    </tr>
+                    <tr class="fragment fade-up">
+                        <th style="text-align: right">LIMIT</th>
+                        <td>count</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h2>Selectors</h2>
+                <pre style="background-color: #333; padding: 10px"><b>> SELECT FIRST(source) FROM samples GROUP BY participant</b>
+name: samples
+tags: participant=1
+time			first
+----			-----
+2013-05-03T19:44:52Z	5386977
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+name: samples
+tags: participant=10
+time			first
+----			-----
+2014-05-29T19:27:28.08Z	5247600
+</pre>
+            </section>
+            <section>
+                <h2>Aggregations</h2>
+                <pre style="background-color: #333; padding: 10px"><b>> SELECT MEAN(veh_speed) FROM samples <span
+                        style="opacity: 0.5">[...]</span> GROUP BY time(10m)</b>
+name: samples
+tags: participant=1
+time			mean
+----			----
+2013-05-07T21:20:00Z	1.7622126436781609
+2013-05-07T21:30:00Z	34.93495879120879
+2013-05-07T21:40:00Z	26.179286858974358
+2013-05-07T21:50:00Z	14.843560606060606
+2013-05-07T22:00:00Z	40.82345744680851
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+name: samples
+tags: participant=10
+time			mean
+----			----
+2014-05-29T19:20:00Z	9.842592592592593
+2014-05-29T19:30:00Z	74.25445103857567
+2014-05-29T19:40:00Z	62.88461538461539
+2014-05-29T19:50:00Z	41.599609375
+2014-05-29T20:00:00Z	40.21259842519685</pre>
+            </section>
+            <section>
+                <h2>Functions</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Aggregations</th>
+                        <th>Selectors</th>
+                        <th>Transformations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>COUNT()</td>
+                        <td>BOTTOM()</td>
+                        <td>CEILING()</td>
+                    </tr>
+                    <tr>
+                        <td>DISTINCT()</td>
+                        <td>FIRST()</td>
+                        <td>CUMULATIVE_SUM()</td>
+                    </tr>
+                    <tr style="opacity: 0.8">
+                        <td>INTEGRAL()</td>
+                        <td>LAST()</td>
+                        <td>DERIVATIVE()</td>
+                    </tr>
+                    <tr style="opacity: 0.6">
+                        <td>MEAN()</td>
+                        <td>MAX()</td>
+                        <td>DIFFERENCE()</td>
+                    </tr>
+                    <tr style="opacity: 0.4">
+                        <td>MEDIAN()</td>
+                        <td>MIN()</td>
+                        <td>ELAPSED()</td>
+                    </tr>
+                    <tr style="opacity: 0.2">
+                        <td>MODE()</td>
+                        <td>PERCENTILE()</td>
+                        <td>FLOOR()</td>
+                    </tr>
+                    <tr style="opacity: 0.1">
+                        <td>SUM()</td>
+                        <td>SAMPLE()</td>
+                        <td>HISTOGRAM()</td>
+                    </tr>
+                    <tr style="opacity: 0.05">
+                        <td>STDDEV()</td>
+                        <td>TOP()</td>
+                        <td>MOVING_AVERAGE()</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+        <section>
+            <section data-background-image="img/python-code.png">
+                <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">Python Client</h1>
+            </section>
+            <section>
+                <h2>Query</h2>
+                <pre><code class="python" style="padding: 10px" data-trim data-noescape>
+config = load_config()
+client = InfluxDBClient(**config["drive4data.influx"])
+res = client.query("SELECT * FROM samples
+                        GROUP BY participant LIMIT 5;")
+for point in res.get_points():
+    print(point)
+
+# {'time': 3000, 'hv_crnt': 0,     'gps_lat_deg': None, ...}
+# {'time': 3009, 'hv_crnt': -3.9,  'gps_lat_deg': None, ...}
+# {'time': 3080, 'hv_crnt': -3.9,  'gps_lat_deg': None, ...}
+# {'time': 3200, 'hv_crnt': -3.9,  'gps_lat_deg': None, ...}
+# {'time': 3890, 'hv_crnt': -3.59, 'gps_lat_deg': None, ...}
+# {'time': 4080, 'hv_crnt': None,  'gps_lat_deg': None, ...}
+
+</code></pre>
+            </section>
+
+        </section>
+        <section>
+            <ul>
+                <li>python library</li>
+                <li>internals : column store, shards, series (&amp; selection / indexing)</li>
+                <li>bugs</li>
+                <li>grafana hands on</li>
+                <li>grafana rendering</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: 'plugin/asciinema/asciinema-player.js'},
+
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+    Reveal.addEventListener('slidechanged', function (event) {
+        if (event.previousSlide) {
+            for (elem of event.previousSlide.getElementsByTagName("asciinema-player")) {
+                setTimeout(function () {
+                    elem.pause();
+                }, 1);
+            }
+        }
+        for (elem of event.currentSlide.getElementsByTagName("asciinema-player")) {
+            setTimeout(function () {
+                elem.play();
+            }, 1);
+        }
+    });
+</script>
+</body>
 </html>
