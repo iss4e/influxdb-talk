@@ -41,11 +41,13 @@
                         <th>MySQL</th>
                     </tr>
                     <tr class="fragment fade-in">
-                        <td>Time Series DBMS <img style="height: 250px"
-                                                  src="https://photos1.blogger.com/blogger/2799/1927/1600/airline1_web.0.jpg"/>
+                        <td>Time Series DBMS
+                            <img style="height: 250px"
+                                 src="https://photos1.blogger.com/blogger/2799/1927/1600/airline1_web.0.jpg"/>
                         </td>
-                        <td>Relational DBMS <img style="height: 250px"
-                                                 src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20160229120043/organization-relational-model.png"/>
+                        <td>Relational DBMS
+                            <img style="height: 250px"
+                                 src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20160229120043/organization-relational-model.png"/>
                         </td>
                     </tr>
                     <tr class="fragment fade-in">
@@ -344,6 +346,56 @@ time			mean
                 <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">Python Client</h1>
             </section>
             <section>
+                <h2>iss4e lib</h2>
+
+                <table style="width: 90%;">
+                    <tr>
+                        <td colspan="2" style="padding: 0 0 5px 0; border-width: 0;">
+                            <pre style="margin: 0; width: 100%;"><code
+                                    class="bash" style="padding: 10px" data-trim data-noescape>
+$ git clone git@github.com:iss4e/iss4e-toolchain.git
+$ cd iss4e-toolchain
+$ python3.5 setup.py develop --user
+</code></pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 10px 0 0;" class="fragment fade-up">
+                            <span style="font-size: 60%; font-family: monospace;">~/iss4e.conf</span>
+                            <pre style="margin: 0; width: 100%;"><code
+                                    class="json" style="padding: 10px" data-trim data-noescape>
+datasources {
+  host = "localhost"
+  influx {
+    host = ${datasources.host}
+    username = ${INFLUX_USER}
+    password = ${INFLUX_PASSWORD}
+  }
+}
+logging {
+  ...
+</code></pre>
+                        </td>
+                        <td style="padding: 0;" class="fragment fade-up">
+                            <span style="font-size: 60%; font-family: monospace;">script.py</span>
+                            <pre style="margin: 0; width: 100%;"><code
+                                    class="python" style="padding: 10px" data-trim data-noescape>
+from iss4e.util.config import <span style="opacity: 0.5">⤦</span>
+   load_config
+config = load_config()
+# config = {
+#   "datasources": {
+#     "influx": {
+#       "host": "localhost",
+#       "username": "iss4e",
+#       "password": "password"
+#     }, ...
+</code></pre>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section>
                 <h2>Query</h2>
                 <pre><code class="python" style="padding: 10px" data-trim data-noescape>
 config = load_config()
@@ -362,11 +414,51 @@ for point in res.get_points():
 
 </code></pre>
             </section>
+            <section>
+                <h2>Write</h2>
+                <pre><code class="python" style="padding: 10px" data-trim data-noescape>
+<b>timestamp            participant  speed  soc</b>
+2016-11-14 17:20:14  5            0      0.8
+2016-11-14 17:21:18  7            20     0.4
+2016-11-14 17:22:34  9            0      1.0
+...
+</code></pre>
+                <pre><code class="python" style="padding: 10px" data-trim data-noescape>
+csv_rows = csv.DictReader(open("samples.csv"))
+client.write_points({
+  'measurement': 'samples',
+  'time': parse_time(row.pop('timestamp')),
+  'tags': {
+    'participant': row.pop('participant')
+  },
+  'fields': row
+} for row in csv_rows)
+</code></pre>
+            </section>
+            <section>
+                <h2>Parallelization</h2>
+                <pre><code class="python" style="padding: 10px" data-trim data-noescape>
+executor = ProcessPoolExecutor(max_workers=16)
+series = client.list_series("samples")
+futures = [executor.submit(my_func, selector)
+                    for tags, selector in series]
+data = [f.result() for f in futures]
+
+def my_func(selector):
+    stream = client.stream_params(
+        "samples",
+        fields="veh_speed",
+        where=selector
+    )
+    return np.histogram([
+        row['veh_speed'] for row in stream
+    ])
+</code></pre>
+            </section>
 
         </section>
         <section>
             <ul>
-                <li>python library</li>
                 <li>internals : column store, shards, series (&amp; selection / indexing)</li>
                 <li>bugs</li>
                 <li>grafana hands on</li>
