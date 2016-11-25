@@ -94,25 +94,40 @@
             <section>
                 <table>
                     <tr>
+                        <th/>
                         <th>InfluxDB</th>
                         <th>kdb+</th>
                     </tr>
                     <tr class="fragment fade-in">
-                        <td>10.000 rows/sec</td>
-                        <td>100.000 rows/sec</td>
-                    </tr>
-                    <tr class="fragment fade-in">
-                        <td>familiar SQL-like query language</td>
-                        <td>Complicated query language</td>
-                    </tr>
-                    <tr class="fragment fade-in">
+                        <td>availability</td>
                         <td>open-source</td>
-                        <td>proprietary</td>
+                        <td>proprietary (free academic license)</td>
+                    </tr>                                        
+                    <tr class="fragment fade-in">
+                        <td>ecosystem</td>
+                        <td>TICK STACK and active community</td>
+                        <td>hardly any additional software</td>
                     </tr>
                     <tr class="fragment fade-in">
-                        <td>big ecosystem of tools</td>
-                        <td>no additional software</td>
+                        <td>database setup</td>
+                        <td>very easy, use existing tooling for complex tasks</td>
+                        <td>easy for simple scenarios<br/>a nightmare for complex tasks</td>
                     </tr>
+                    <tr class="fragment fade-in">
+                        <td>inserts (single thread)</td>
+                        <td>~10.000 rows/sec</td>
+                        <td>~100.000 rows/sec</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>query syntax</td>
+                        <td>SQL-like</td>
+                        <td>SQL-like</td>
+                    </tr>
+                    <tr class="fragment fade-in">
+                        <td>interface</td>
+                        <td>HTTP API<br/>easy to use python connector</td>
+                        <td>python connector sends q commands directly to kdb+ <br/>difficult to use</td>
+                    </tr>                    
                 </table>
             </section>
             <section>
