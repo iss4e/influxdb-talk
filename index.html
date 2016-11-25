@@ -41,13 +41,16 @@
                         <th>MySQL</th>
                     </tr>
                     <tr class="fragment fade-in">
-                        <td>Time Series DBMS
-                            <img style="height: 250px"
-                                 src="https://photos1.blogger.com/blogger/2799/1927/1600/airline1_web.0.jpg"/>
+                        <td>Time Series DBMS <br/>
+                            <img style="height: 250px; background: white"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/0/02/ScientificGraphSpeedVsTime.svg"/>
                         </td>
-                        <td>Relational DBMS
-                            <img style="height: 250px"
+                        <td>Relational DBMS <br/>
+                            <img style="height: 250px; vertical-align: middle"
                                  src="https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/20160229120043/organization-relational-model.png"/>
+                            <a href="https://neo4j.com/developer/graph-db-vs-rdbms/"
+                               style="font-size: 10px; transform: rotate(90deg); display: inline-block;">&copy;
+                                Neo4j</a>
                         </td>
                     </tr>
                     <tr class="fragment fade-in">
@@ -128,10 +131,14 @@
             <section>
                 <img class="stretch" style="border: 0; margin: 0;"
                      src="https://www.influxdata.com/wp-content/themes/influx/images/TICK-Stack.png"/>
+                <a href="https://www.influxdata.com/time-series-platform/"
+                   style="font-size: 10px; display: block">&copy; InfluxData</a>
             </section>
             <section>
                 <img class="stretch" style="border: 0; margin: 0;"
-                     src="http://grafana.org/assets/img/blog/v3.0/zabbix_app.png"/>
+                     src="https://cloud.githubusercontent.com/assets/4932851/16547269/69d67380-4170-11e6-9724-ac8b53cd8b93.png"/>
+                <a href="https://github.com/alexanderzobnin/grafana-zabbix"
+                   style="font-size: 10px; display: block">&copy; alexanderzobnin</a>
             </section>
         </section>
         <section>
@@ -462,12 +469,16 @@ def my_func(selector):
                 <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">and lessons learnt</h2>
             </section>
             <section>
+                <a href="https://r.va.gg/presentations/nodejsdub/#/3" class="fragment fade-in" data-fragment-index="2"
+                   style="font-size: 10px; transform: rotate(-90deg); display: inline-block;">&copy; Rod Vagg</a>
                 <img class="fragment fade-in" data-fragment-index="2"
                      style="background: transparent; box-shadow: none; border: none; vertical-align: middle"
                      src="img/leveldb_simple.svg">
                 <h2 style="display: inline; vertical-align: middle">Data Storage</h2>
                 <ul>
-                    <li class="fragment fade-in" data-fragment-index="1">insert and read optimized, delete and update slow</li>
+                    <li class="fragment fade-in" data-fragment-index="1">insert and read optimized, delete and update
+                        slow
+                    </li>
                     <li class="fragment fade-in" data-fragment-index="2">
                         data is stored in a LevelDB:<br/>
                         <b>&middot; WAL+Cache:</b> fast writes, slow reads<br/>
