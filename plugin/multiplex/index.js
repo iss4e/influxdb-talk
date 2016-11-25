@@ -20,6 +20,7 @@ io.on( 'connection', function( socket ) {
 		if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 		if (createHash(data.secret) === data.socketId) {
 			data.secret = null;
+			console.log(data.socketId, data);
 			socket.broadcast.emit(data.socketId, data);
 		};
 	});

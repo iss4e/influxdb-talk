@@ -455,15 +455,67 @@ def my_func(selector):
     ])
 </code></pre>
             </section>
-
         </section>
         <section>
-            <ul>
-                <li>internals : column store, shards, series (&amp; selection / indexing)</li>
-                <li>bugs</li>
-                <li>grafana hands on</li>
-                <li>grafana rendering</li>
-            </ul>
+            <section data-background-image="http://ww2.justanswer.com/uploads/Tr4inwrek/2011-08-10_004426_gears.jpg">
+                <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">InfluxDB internals</h1>
+                <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">and lessons learnt</h2>
+            </section>
+            <section>
+                <img class="fragment fade-in" data-fragment-index="2"
+                     style="background: transparent; box-shadow: none; border: none; vertical-align: middle"
+                     src="img/leveldb_simple.svg">
+                <h2 style="display: inline; vertical-align: middle">Data Storage</h2>
+                <ul>
+                    <li class="fragment fade-in" data-fragment-index="1">insert and read optimized, delete and update slow</li>
+                    <li class="fragment fade-in" data-fragment-index="2">
+                        data is stored in a LevelDB:<br/>
+                        <b>&middot; WAL+Cache:</b> fast writes, slow reads<br/>
+                        &nbsp;&nbsp;&nbsp;&darr; gets compacted into &darr;<br/>
+                        <b>&middot; TSM-Shards:</b> slow compactions, fast reads<br/>
+                    </li>
+                    <li class="fragment fade-in" data-fragment-index="3">
+                        data is stored in "dense" per-field columns,<br/>
+                        not in sparse rows
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>...consequences</h2>
+                <ul>
+                    <li class="fragment fade-in">row with same time and tags overwrites previous row</li>
+                    <li class="fragment fade-in">
+                        only fields can be queried and <br/>
+                        only tags can (and should) be used for grouping
+                    </li>
+                    <li class="fragment fade-in">high series cardinality heavily impacts performance</li>
+                    <li class="fragment fade-in">collecting data from all series/shards is time consuming</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Bugs</h2>
+                <img src="img/github-bugs.png" class="fragment fade-out fade-away" data-fragment-index="1"/>
+                <ul>
+                    <li class="fragment fade-in" data-fragment-index="1">querying across series can be extremely slow
+                    </li>
+                    <li class="fragment fade-in">large float values (~1.8+308) break aggregations</li>
+                    <li class="fragment fade-in">
+                        when data is inserted in random order,<br/>
+                        wrong shards boundaries could be created
+                    </li>
+                    <li class="fragment fade-in">ODER BY time DESC was added in 1.2</li>
+                    <li class="fragment fade-in">
+                        most of the functions can't be nested / combined
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section data-background-image="http://grafana.org/assets/img/blog/v3.0/zabbix_app.png">
+            <h1 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);">
+                <a href="http://tornado.cs.uwaterloo.ca:3000/" target="_blank">
+                    Grafana
+                </a>
+            </h1>
         </section>
     </div>
 </div>
@@ -476,6 +528,8 @@ def my_func(selector):
     Reveal.initialize({
         history: true,
         dependencies: [
+            {src: '//cdn.socket.io/socket.io-1.3.5.js', async: true},
+            {src: 'plugin/multiplex/master.js', async: true},
             {src: 'plugin/asciinema/asciinema-player.js'},
 
             {src: 'plugin/markdown/marked.js'},
